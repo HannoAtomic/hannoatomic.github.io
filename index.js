@@ -75,7 +75,7 @@ function changeSide(){
         document.getElementById('sideImg').alt = "CT";
         console.log("T detected, Swapping to CT")
         side = 1;
-        document.getElementById("lossWithPlant").disabled = true;;
+        document.getElementById("lossWithPlant").disabled = true;
         document.getElementById("winCondition").textContent = "Win by Defuse";
     }
 	reset()

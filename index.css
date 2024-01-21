@@ -46,8 +46,3 @@ h1 {
   font-size: 30px;
   font-weight: bold;
 }
-
-button:disabled {
-    background: #F5F5F5;
-    color : #C3C3C3;
-}
