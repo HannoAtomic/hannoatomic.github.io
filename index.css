@@ -12,14 +12,16 @@ body {
   background: #3a476a;
   min-height: 100vh;
 }
-
+.side {
+    margin-bottom: 20px;
+}
 .box {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background: #ffbd6c;
-  border: 2px solid #3a476a;
+  border: 2px solid;
   padding: 25px;
   margin: 10px;
 }
@@ -32,7 +34,6 @@ body {
   justify-content: center;
   display: flex;
   margin-top: -55px;
-
 }
 
 .buttons button {
@@ -44,4 +45,9 @@ body {
 h1 {
   font-size: 30px;
   font-weight: bold;
+}
+
+button:disabled {
+    background: #F5F5F5;
+    color : #C3C3C3;
 }

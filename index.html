@@ -19,19 +19,23 @@
     	<div class = "money">
 		<p id="money">$800</p>
     	</div>
+        
+        <div class = "side">
+		<img id="sideImg" src="images/ct.png" alt="CT" width="100" height="100" />
+    	</div>
 
     	<div class="buttons">
       		<button onclick="changeMoney(-650)">Pistol</button>
       		<button onclick="changeMoney(-3500)">Full Buy</button>
       		<button onclick="force()">Force</button>
-      		<button onclick="changeMoney(0)">Eco</button>
+      		<!--<button onclick="changeMoney(0)">Eco</button>-->
     	</div>
 
     	<div class="buttons">
       		<button onclick="changeMoney(3250)">Win</button>
-      		<button onclick="changeMoney(3500)">Win w/ Explode or Defuse</button>
+      		<button id="winCondition" onclick="changeMoney(3500)">Win by Defuse</button>
       		<button onclick="loss(false)">Loss</button>
-      		<button onclick="loss(true)">Loss w/ Plant</button>
+      		<button id="lossWithPlant" onclick="loss(true)" disabled="true">Loss w/ Plant</button>
     	</div>
     	<div class="buttons">
       		<button onclick="reset()">RESET</button>
