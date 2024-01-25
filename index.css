@@ -46,3 +46,12 @@ h1 {
   font-size: 30px;
   font-weight: bold;
 }
+
+li {
+  display: inline;
+}
+
+a {
+  padding: 8px;
+  background-color: #dddddd;
+}
