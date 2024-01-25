@@ -4,7 +4,7 @@ const playerEloList = document.getElementById("eloList");
 
 
 function search(){
-    fetch("http://127.0.0.1:5000/faceitAPIfetch", {
+    fetch("http://HannoAtomic.eu.pythonanywhere.com/faceitAPIfetch", {
         method: "GET"
     }).then((Response => Response.json())).then((json) => replace(json))
 }
