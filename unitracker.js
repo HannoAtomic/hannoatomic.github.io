@@ -13,7 +13,6 @@ var playerNamesList = [];
 var playerElosList = [];
 
 function replace(text){
-    console.log("replace text")
     while(playerEloList.firstChild){
         playerEloList.innerHTML = "";
         playerNameList.innerHTML = "";
@@ -25,6 +24,8 @@ function replace(text){
         playerNamesList.push(item[0]);
         playerElosList.push(item[1]);
       });
+
+
     playerNamesList.forEach((name) => {
         var listElement = document.createElement("li");
         listElement.appendChild(document.createTextNode(name));
@@ -34,6 +35,24 @@ function replace(text){
     playerElosList.forEach((elo) => {
         var listElement = document.createElement("li");
         listElement.appendChild(document.createTextNode(elo));
+        eloInt = parseInt(elo);
+        console.log(eloInt)
+        if(eloInt > 2000){
+            listElement.className = "redELO";
+            console.log("red elo detected");
+        }else if(eloInt > 1700){
+            listElement.className = "orangeELO";
+            console.log("orange elo detected");
+        }else if(eloInt > 1100){
+            listElement.className = "yellowELO";
+            console.log("yellow elo detected");
+        }else if(eloInt > 800){
+            listElement.className = "greenELO";
+            console.log("green elo detected");
+        }else{
+            listElement.className = "greyELO";
+            console.log("grey elo detected");
+        }
         playerEloList.appendChild(listElement);
     })
 

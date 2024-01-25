@@ -35,8 +35,9 @@ body {
 
 li {
     list-style-type: "";
-    background: #FFD700;
-    padding: 3px;
+    background: #4e0215;
+    padding: 4px;
+    font-size: 20px;
 }
 
 #listSpace ul {
@@ -57,4 +58,24 @@ img{
     margin-left: auto;
     margin-right: auto;
     width: 65%;
+}
+
+.redELO{
+  color: red;
+}
+
+.orangeELO{
+  color: orange;
+}
+
+.yellowELO{
+  color: yellow;
+}
+
+.greenELO{
+  color: green;
+}
+
+.greyELO{
+  color: grey;
 }
