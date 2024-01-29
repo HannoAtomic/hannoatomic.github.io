@@ -16,8 +16,8 @@ function replace(text){
     while(playerEloList.firstChild){
         playerEloList.innerHTML = "";
         playerNameList.innerHTML = "";
-        var playerNamesList = [];
-        var playerElosList = [];
+        playerNamesList = [];
+        playerElosList = [];
     }
     
     text.forEach((item) => {
@@ -56,4 +56,58 @@ function replace(text){
         playerEloList.appendChild(listElement);
     })
 
+    chartElo();
+
+}
+
+
+function chartElo(){
+    yAxisEloArray = playerElosList.reverse();
+    xAxisNameArray = playerNamesList.reverse();
+
+    const barColors = "orange";
+
+    new Chart("eloChart", {
+        type: "bar",
+        data: {
+            labels: xAxisNameArray,
+            datasets: [{
+                backgroundColor: barColors,
+                data: yAxisEloArray
+            }]
+        },
+        options: {
+            legend: {display: false},
+            scales: {
+                xAxes: [{
+                  display: true,
+                  gridLines: {
+                    display: false
+                  },
+                  scaleLabel: {
+                    display: true,
+                    labelString: 'Player',
+                    fontColor: "#D1D1D1"
+                  },
+                  ticks: {
+                    fontColor: "#D1D1D1"
+                  }
+                }],
+                yAxes: [{
+                    display: true,
+                    gridLines: {
+                      display: false
+                    },
+                    scaleLabel: {
+                      display: true,
+                      labelString: 'Elo',
+                      fontColor: "#D1D1D1"
+                    },
+                    ticks: {
+                        fontColor: "#D1D1D1"
+                    }
+                  }]
+                }
+        }
+    });
 }

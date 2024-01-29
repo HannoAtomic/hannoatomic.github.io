@@ -7,6 +7,9 @@
   <title>CS Economy Tracker</title>
   <link rel="stylesheet" href="./unitracker.css">
   <script src="./unitracker.js" defer></script>
+  <script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
 </head>
 <body>
     <div>
@@ -18,11 +21,15 @@
     <div>
         <button id="searchButton" onclick="search()">Elo Check</button>
     </div>
-    <div id="listSpace">
-        <ul  id="nameList">
-		</ul>
-        <ul id="eloList">
-		</ul>
+    <div id="sideBySide">    
+        <div id="listSpace">
+            <ul  id="nameList">
+		    </ul>
+            <ul id="eloList">
+		    </ul>
+        </div>
+        <canvas id="eloChart"></canvas>
     </div>
+    
 </body>
 </html>
