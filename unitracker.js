@@ -1,69 +1,130 @@
-//const playerNames = document.getElementById('playerNames').textContent;
-const playerNameList = document.getElementById("nameList");
-const playerEloList = document.getElementById("eloList");
-
-
+// get request - fetch json file of all the players and their elos
 function search(){
     fetch("https://HannoAtomic.eu.pythonanywhere.com/faceitAPIfetch", {
         method: "GET"
     }).then((Response => Response.json())).then((json) => replace(json))
 }
 
-var playerNamesList = [];
-var playerElosList = [];
+var newPlayerNames = [];
+var newPlayerElos = [];
+var newPlayerElosChange = [];
+var previousPlayerElos = [];
+var previousPlayerNames = [];
+var currentPlayerElosList = []; 
+var currentPlayerNamesList = []; 
 
 function replace(text){
-    while(playerEloList.firstChild){
-        playerEloList.innerHTML = "";
-        playerNameList.innerHTML = "";
-        playerNamesList = [];
-        playerElosList = [];
+    //fetch the UL html text elements
+    var currentPlayerNames = document.getElementById("nameList");
+    var currentPlayerElos = document.getElementById("eloList");
+    var currentPlayerEloChange = document.getElementById("changeList");
+
+    // if a list is already present, take the names/elos and compare to new values
+    if(currentPlayerElos.firstChild && currentPlayerNames.firstChild){
+        listNames = currentPlayerNames.getElementsByTagName("li")
+        listElos = currentPlayerElos.getElementsByTagName("li")
+        nameData = [];
+        eloData = [];
+        for(let i=0; i< listNames.length;i++) {
+            nameData.push(listNames[i].innerText);
+            eloData.push(listElos[i].innerText)
+          }
+        previousPlayerNames = Array.from(nameData);
+        previousPlayerElos = Array.from(eloData);
+    }
+
+    // clear any current list
+    while(currentPlayerElos.firstChild){
+        currentPlayerElos.innerHTML = "";
+        currentPlayerNames.innerHTML = "";
+        newPlayerNames = [];
+        newPlayerElos = [];
+        newPlayerElosChange = [];
     }
     
+    // go through json and push to list
     text.forEach((item) => {
-        playerNamesList.push(item[0]);
-        playerElosList.push(item[1]);
+        newPlayerNames.push(item[0]);
+        newPlayerElos.push(item[1]);
       });
 
+    newPlayerNames.forEach((item)=>{
+        newPlayerElosChange.push(" ");
+    })
 
-    playerNamesList.forEach((name) => {
+    // go through player names and check if they had a previous elo - if they did create an elo CHANGE value
+
+    for (var i = 0; i < newPlayerNames.length; i++) {
+        var nameIndex = previousPlayerNames.indexOf(newPlayerNames[i]);
+        if(nameIndex > -1){
+            var changeInElo = parseInt(newPlayerElos[i]) - parseInt(previousPlayerElos[nameIndex]);
+            newPlayerElosChange[i] = changeInElo;
+            console.log(changeInElo)
+        }
+    }
+
+    // go through list and create html list element for NAMES
+    newPlayerNames.forEach((name) => {
         var listElement = document.createElement("li");
         listElement.appendChild(document.createTextNode(name));
-        playerNameList.appendChild(listElement);
+        currentPlayerNames.appendChild(listElement);
     })
 
-    playerElosList.forEach((elo) => {
+    // go through list and create hmtl coloured list element for ELO
+    newPlayerElos.forEach((elo) => {
         var listElement = document.createElement("li");
         listElement.appendChild(document.createTextNode(elo));
-        eloInt = parseInt(elo);
-        console.log(eloInt)
+        var eloInt = parseInt(elo);
         if(eloInt > 2000){
             listElement.className = "redELO";
-            console.log("red elo detected");
         }else if(eloInt > 1700){
             listElement.className = "orangeELO";
-            console.log("orange elo detected");
         }else if(eloInt > 1100){
             listElement.className = "yellowELO";
-            console.log("yellow elo detected");
         }else if(eloInt > 800){
             listElement.className = "greenELO";
-            console.log("green elo detected");
         }else{
             listElement.className = "greyELO";
-            console.log("grey elo detected");
         }
-        playerEloList.appendChild(listElement);
+        currentPlayerElos.appendChild(listElement);
     })
 
+    //creat the list with all the new elo changes
+    newPlayerElosChange.forEach((eloChange) => {
+        
+        var listElement = document.createElement("li");
+        if(eloChange == " "){
+            listElement.appendChild(document.createTextNode(eloChange));
+            return;
+        } else{
+            var eloChangeInt = parseInt(eloChange);
+            if(eloChangeInt == 0){
+                console.log("0 detected")
+                eloChange = " ";
+                listElement.appendChild(document.createTextNode(eloChange))
+            } else if(eloChangeInt < 0){
+                listElement.className = "redELO";
+                listElement.appendChild(document.createTextNode(eloChange))
+                console.log("loss detected")
+            } else if(eloChangeInt > 0){
+                listElement.className = "greenELO";
+                listElement.appendChild(document.createTextNode(eloChange))
+                console.log("gain detected")
+            } else {
+                console.log("Error in elo change")
+                console.table(eloChangeInt)
+            }
+            currentPlayerEloChange.appendChild(listElement);
+        }
+    })
+    //chart the player elos
     chartElo();
-
 }
 
 
 function chartElo(){
-    yAxisEloArray = playerElosList.reverse();
-    xAxisNameArray = playerNamesList.reverse();
+    yAxisEloArray = newPlayerElos.reverse();
+    xAxisNameArray = newPlayerNames.reverse();
 
     const barColors = "orange";
 
