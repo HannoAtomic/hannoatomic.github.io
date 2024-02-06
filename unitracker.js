@@ -37,6 +37,7 @@ function replace(text){
     while(currentPlayerElos.firstChild){
         currentPlayerElos.innerHTML = "";
         currentPlayerNames.innerHTML = "";
+        currentPlayerEloChange.innerHTML = "";
         newPlayerNames = [];
         newPlayerElos = [];
         newPlayerElosChange = [];
@@ -49,17 +50,18 @@ function replace(text){
       });
 
     newPlayerNames.forEach((item)=>{
-        newPlayerElosChange.push(" ");
+        newPlayerElosChange.push("0");
     })
 
-    // go through player names and check if they had a previous elo - if they did create an elo CHANGE value
-
+    // go through player names and check if they had a previous elo - if they did update the changeInElo value
     for (var i = 0; i < newPlayerNames.length; i++) {
         var nameIndex = previousPlayerNames.indexOf(newPlayerNames[i]);
         if(nameIndex > -1){
             var changeInElo = parseInt(newPlayerElos[i]) - parseInt(previousPlayerElos[nameIndex]);
             newPlayerElosChange[i] = changeInElo;
             console.log(changeInElo)
+        } else {
+            newPlayerElosChange[i] = "0";
         }
     }
 
@@ -91,31 +93,26 @@ function replace(text){
 
     //creat the list with all the new elo changes
     newPlayerElosChange.forEach((eloChange) => {
-        
         var listElement = document.createElement("li");
-        if(eloChange == " "){
-            listElement.appendChild(document.createTextNode(eloChange));
-            return;
-        } else{
-            var eloChangeInt = parseInt(eloChange);
-            if(eloChangeInt == 0){
-                console.log("0 detected")
-                eloChange = " ";
-                listElement.appendChild(document.createTextNode(eloChange))
-            } else if(eloChangeInt < 0){
-                listElement.className = "redELO";
-                listElement.appendChild(document.createTextNode(eloChange))
-                console.log("loss detected")
-            } else if(eloChangeInt > 0){
-                listElement.className = "greenELO";
-                listElement.appendChild(document.createTextNode(eloChange))
-                console.log("gain detected")
-            } else {
-                console.log("Error in elo change")
-                console.table(eloChangeInt)
-            }
-            currentPlayerEloChange.appendChild(listElement);
+        var eloChangeInt = parseInt(eloChange);
+        if(eloChangeInt == 0){
+            console.log("0 detected")
+            eloChange = "0";
+            listElement.appendChild(document.createTextNode(eloChange))
+        } else if(eloChangeInt < 0){
+            listElement.className = "redELO";
+            listElement.appendChild(document.createTextNode(eloChange))
+            console.log("loss detected")
+        } else if(eloChangeInt > 0){
+            listElement.className = "greenELO";
+            listElement.appendChild(document.createTextNode(eloChange))
+            console.log("gain detected")
+        } else {
+            console.log("Error in elo change")
+            console.table(eloChangeInt)
         }
+        currentPlayerEloChange.appendChild(listElement);
+        
     })
     //chart the player elos
     chartElo();
