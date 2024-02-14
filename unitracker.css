@@ -50,20 +50,21 @@ li {
     margin-left:-25px;
     justify-content: center;
 }
+/**
 #eloChart{
   float:left;
   max-width:70%;
   padding-top: 150px;
   padding-left: 50px;
-}
+} **/
 h1 {
     font-size: 40px;
     font-weight: bold;
     color: #FFD700;
   }
-#sideBySide{
+/**#sideBySide{
   min-width: 75%;
-}
+}**/
 img{
     display: block;
     margin-left: auto;
