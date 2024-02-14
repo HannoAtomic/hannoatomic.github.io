@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UoS Elo Leaderboard</title>
+  <link rel="icon" type="image/x-icon" href="./images/uosvge.jpg">
+  <link rel="stylesheet" href="./faceitIdFinder.css">
+  <script src="./faceitIdFinder.js" defer></script>
+  <script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+    
+</head>
+<body>
+
+      <ul>
+        <li>
+          <p>Faceit name:</p><br>
+          <input type="text" id="faceitName" name="faceitName"> <br>
+        </li>
+        <li class="button">
+          <button id="submit" onclick="fetchFaceitID()">Submit</button>
+        </li>
+      </ul>
+
+  <p id="faceit_id"></p>
+  <p id="faceit_nickname"></p>
+  <p id="faceit_country"></p>
+</body>
+</html>
