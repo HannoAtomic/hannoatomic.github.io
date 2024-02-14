@@ -59,7 +59,6 @@ function replace(text){
         if(nameIndex > -1){
             var changeInElo = parseInt(newPlayerElos[i]) - parseInt(previousPlayerElos[nameIndex]);
             newPlayerElosChange[i] = changeInElo;
-            console.log(changeInElo)
         } else {
             newPlayerElosChange[i] = "0";
         }
@@ -96,17 +95,14 @@ function replace(text){
         var listElement = document.createElement("li");
         var eloChangeInt = parseInt(eloChange);
         if(eloChangeInt == 0){
-            console.log("0 detected")
             eloChange = "0";
             listElement.appendChild(document.createTextNode(eloChange))
         } else if(eloChangeInt < 0){
             listElement.className = "redELO";
             listElement.appendChild(document.createTextNode(eloChange))
-            console.log("loss detected")
         } else if(eloChangeInt > 0){
             listElement.className = "greenELO";
             listElement.appendChild(document.createTextNode(eloChange))
-            console.log("gain detected")
         } else {
             console.log("Error in elo change")
             console.table(eloChangeInt)
@@ -115,7 +111,7 @@ function replace(text){
         
     })
     //chart the player elos
-    chartElo();
+    //chartElo();
 }
 
 
