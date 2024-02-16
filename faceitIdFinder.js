@@ -5,10 +5,9 @@ async function fetchFaceitID() {
     }).then((Response => Response.json())).then((json) => updatePage(json))
 }
 
-var faceit_id = document.getElementById("faceit_id").value;
-var faceit_name = document.getElementById("faceit_nickname").value;
-var faceit_country = document.getElementById("faceit_country").value;
+var displayID = document.getElementById("faceit_id");
 
 function updatePage(faceit_information){
     console.table(faceit_information)
+    displayID.textContent = faceit_information;
 }

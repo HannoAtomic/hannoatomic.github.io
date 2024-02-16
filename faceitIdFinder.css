@@ -2,6 +2,7 @@
 
 body {
     background: #4e0215;
+    text-align: center;
 }
 
 form {
@@ -63,13 +64,19 @@ form {
     height: 5em;
   }
   
-  .button {
-    /* Align buttons with the text fields */
-    padding-left: 90px; /* same size as the label elements */
-  }
-  
   button {
     /* This extra margin represent roughly the same space as the space
        between the labels and their text fields */
     margin-left: 0.5em;
+    margin-top: 1em;
+  }
+
+  p {
+    font-size: 20px;
+    color: white;
+  }
+
+  #faceit_id{
+    font-size: 20px;
+    color: white;
   }
